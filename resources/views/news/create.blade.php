@@ -38,17 +38,18 @@
                                 @csrf
                                 <div class="form-group">
                                     <label> Title:</label>
-                                    <input name="title" type="text" class="form-control" required>
+                                    <input name="title" type="text" class="form-control" placeholder="Enter ... "
+                                        required>
                                 </div>
                                 <!-- textarea -->
                                 <div class="form-group">
                                     <label>Abstract:</label>
-                                    <textarea name="abstract" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                    <textarea name="abstract" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
                                 </div>
                                 <!-- textarea -->
                                 <div class="form-group">
                                     <label>Details:</label>
-                                    <textarea name="details" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                    <textarea name="details" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Photo:</label>

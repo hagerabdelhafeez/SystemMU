@@ -118,9 +118,9 @@ class CurriculumController extends Controller
      * @param  \App\Models\Curriculum  $curriculum
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,Curriculum $curriculum)
+    public function edit($id)
     {
-        //$curriculum = Curriculum::findOrFail($request->id);
+        $curriculum = Curriculum::findOrFail($id);
         $colleges = College::all();
         $departments = Department::all();
         $classes = Clas::all();

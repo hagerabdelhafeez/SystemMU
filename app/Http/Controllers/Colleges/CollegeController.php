@@ -87,7 +87,7 @@ class CollegeController extends Controller
      * @param  \App\Models\College  $college
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreColleges $request, College $college)
+    public function update(StoreColleges $request)
     {
         try{
 
@@ -114,7 +114,7 @@ class CollegeController extends Controller
      * @param  \App\Models\College  $college
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, College $college)
+    public function destroy(Request $request)
     {
         $department_id = Department::where('colleges_id',$request->id)->pluck('colleges_id');
 

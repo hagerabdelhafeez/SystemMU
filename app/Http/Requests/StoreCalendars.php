@@ -24,8 +24,8 @@ class StoreCalendars extends FormRequest
     public function rules()
     {
         return [
-            'events' => 'required|unique:calendars,events,'.$this->id,
-            'dates' => 'required|date:calendars,dates,'.$this->id,
+            'events' => 'String|required|unique:calendars,events,'.$this->id,
+            'dates' => 'required|date|after:tomorrow'.$this->id,
         ];
     }
 }

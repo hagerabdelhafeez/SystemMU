@@ -108,7 +108,7 @@
                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                     data-target="#edit{{ $item->id }}" title="Edit"><i
                                                         class="fa fa-edit"></i></button>
-                                                        
+
                                                 {{-- Delete_modal --}}
                                                 <div class="modal fade" id="delete{{ $item->id }}">
                                                     <div class="modal-dialog">

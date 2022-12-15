@@ -88,7 +88,7 @@ class CalendarController extends Controller
      * @param  \App\Models\Calendar  $calendar
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCalendars $request, Calendar $calendar)
+    public function update(StoreCalendars $request)
     {
         try {
             $validated = $request->validated();
@@ -114,7 +114,7 @@ class CalendarController extends Controller
      * @param  \App\Models\Calendar  $calendar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,Calendar $calendar)
+    public function destroy(Request $request)
     {
         $calendar = Calendar::findOrFail($request->id);
         $calendar->delete();

@@ -88,7 +88,7 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreDepartments $request, Department $department)
+    public function update(StoreDepartments $request)
     {
         try {
 
@@ -111,7 +111,7 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,Department $department)
+    public function destroy(Request $request)
     {
         $department = Department::findOrFail($request->id);
         $department->delete();

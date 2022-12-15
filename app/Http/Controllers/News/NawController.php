@@ -82,9 +82,9 @@ class NawController extends Controller
      * @param  \App\Models\Naw  $naw
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,Naw $naw)
+    public function edit($id)
     {
-        $naw = Naw::findOrFail($request->id);
+        $naw = Naw::findOrFail($id);
         return view('news.edit',compact('naw'));
     }
 
@@ -95,7 +95,7 @@ class NawController extends Controller
      * @param  \App\Models\Naw  $naw
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNews $request, Naw $naw)
+    public function update(StoreNews $request)
     {
         try{
 
@@ -127,7 +127,7 @@ class NawController extends Controller
      * @param  \App\Models\Naw  $naw
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,Naw $naw)
+    public function destroy(Request $request)
     {
         $naw = Naw::findOrFail($request->id);
         $naw->delete();

@@ -86,7 +86,7 @@ class YearController extends Controller
      * @param  \App\Models\Year  $year
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreYears $request, Year $year)
+    public function update(StoreYears $request)
     {
         try{
 
@@ -113,7 +113,7 @@ class YearController extends Controller
      * @param  \App\Models\Year  $year
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,Year $year)
+    public function destroy(Request $request)
     {
         $year = Year::findOrFail($request->id)->delete();
             toastr()->error('Year has been deleted successfully!','Delete');

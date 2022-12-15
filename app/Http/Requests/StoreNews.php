@@ -24,7 +24,7 @@ class StoreNews extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required'.$this->id,
+            'title' => 'required|unique:naws,title'.$this->id,
             'photos' => 'required|image'.$this->id,
             'abstract' => 'required'.$this->id,
             'details' => 'required'.$this->id,

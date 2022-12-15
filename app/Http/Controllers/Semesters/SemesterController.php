@@ -87,7 +87,7 @@ class SemesterController extends Controller
      * @param  \App\Models\Semester  $semester
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreSemesters $request, Semester $semester)
+    public function update(StoreSemesters $request)
     {
         try {
 
@@ -110,7 +110,7 @@ class SemesterController extends Controller
      * @param  \App\Models\Semester  $semester
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,Semester $semester)
+    public function destroy(Request $request)
     {
         $semester = Semester::findOrFail($request->id);
         $semester->delete();
