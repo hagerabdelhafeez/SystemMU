@@ -24,8 +24,9 @@ class StoreYears extends FormRequest
     public function rules()
     {
         return [
-            'year_name' => 'required|unique:years,year_name,'.$this->id,
-            'year'=> 'required|unique:years,year,'.$this->id,
+            'year_name' => 'required',
+            'year'=> 'required',
+           
         ];
     }
 }

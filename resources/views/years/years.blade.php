@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
 @endsection
 
 @section('title_page1')
@@ -50,6 +54,7 @@
                                         <th>#</th>
                                         <th>Year name</th>
                                         <th>The Year</th>
+                                        <th>The Semester</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -62,6 +67,13 @@
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $item->year_name }}</td>
                                             <td>{{ $item->year }}</td>
+                                            <td>
+                                                @foreach ($item->semesters as $sem)
+                                                    {{ $sem['semester_name'] }}
+                                                    <br>
+                                                @endforeach
+                                            </td>
+
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                     data-target="#edit{{ $item->id }}" title="Edit"><i
@@ -135,6 +147,20 @@
                                                                 <input type="text" class="form-control" name="year"
                                                                     value="{{ $item->year }}" required>
 
+                                                                <label>Semester name</label>
+                                                                <select class="select2bs4" multiple="multiple"
+                                                                    data-placeholder="Choose..." name="semester_id[]">
+                                                                    @foreach ($item->semesters as $sem)
+                                                                        <option selected value="{{ $sem['id'] }}">
+                                                                            {{ $sem['semester_name'] }}</option>
+                                                                    @endforeach
+                                                                    @foreach ($semesters as $item)
+                                                                        <option value="{{ $item->id }}">
+                                                                            {{ $item->semester_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+
 
                                                             </div>
 
@@ -180,19 +206,25 @@
                         <form action="{{ route('years.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label class="col-form-label"> Year
-                                    Name:
-
-                                </label>
+                                <label class="col-form-label"> Year Name:</label>
                                 <input name="year_name" type="text" class="form-control" placeholder="Enter ..."
                                     required>
 
-                                <label class="col-form-label">The Year
-                                    :
-
-                                </label>
+                                <label class="col-form-label">The Year:</label>
                                 <input name="year" type="text" class="form-control" placeholder="Enter ..."
                                     required>
+
+
+                                <label>Semester name</label>
+                                <select class="select2bs4" multiple="multiple" data-placeholder="Choose..."
+                                    name="semester_id[]">
+                                    @foreach ($semesters as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->semester_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -248,6 +280,23 @@
                 "responsive": true,
             });
         });
+    </script>
+
+    <!-- Select2 -->
+    <script type="text/javascript" src="{{ URL::asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+
+        })
     </script>
 
 @endsection

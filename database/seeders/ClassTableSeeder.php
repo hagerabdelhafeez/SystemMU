@@ -17,7 +17,7 @@ class ClassTableSeeder extends Seeder
     {
         DB::table('clas')->delete();
 
-        $cgs = ['First Class', 'Second Class', 'Third Class', 'Fourth Class', 'Fifth Class', 'Sixth Class'];
+        $cgs = ['First year', 'Second year', 'Third year', 'Fourth year', 'Fifth year'];
 
         foreach($cgs as  $cg){
             Clas::create(['class_name' => $cg]);

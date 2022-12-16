@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Semesters;
 
 use App\Models\Semester;
+use App\Models\Year;
 use App\Models\Clas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

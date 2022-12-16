@@ -11,8 +11,8 @@ class College extends Model
     protected $table = 'colleges';
     protected $fillable=['college_name'];
 
-    public function curriculum()
+    public function departments()
     {
-        return $this->hasMany('App\Models\Curriculum', 'colleges_id');
+        return $this->hasMany('App\Models\Department', 'colleges_id');
     }
 }

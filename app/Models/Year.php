@@ -11,4 +11,9 @@ class Year extends Model
     protected $table = 'years';
     protected $fillable=['year_name','year'];
 
+
+    public function semesters(){
+        return $this->belongsToMany('App\Models\Semester', 'semester_year');
+    }
+
 }

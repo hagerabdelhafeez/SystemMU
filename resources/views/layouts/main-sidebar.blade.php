@@ -102,7 +102,7 @@
                          </li>
 
                          <li class="nav-item">
-                             <a href="{{ route('curriculums.index') }}" class="nav-link">
+                             <a href="" class="nav-link">
                                  <i class="far fa-circle nav-icon"></i>
                                  <p>Curriculums</p>
                              </a>
@@ -179,14 +179,14 @@
                          </p>
                      </a>
                  </li>
-                 <li class="nav-item">
+                 {{-- <li class="nav-item">
                      <a href="{{ route('sliders.index') }}" class="nav-link">
                          <i class="nav-icon far fa-images"></i>
                          <p>
                              Sliders
                          </p>
                      </a>
-                 </li>
+                 </li> --}}
                  <li class="nav-item">
                      <a href="" class="nav-link">
                          <i class="nav-icon fas fa-cogs"></i>

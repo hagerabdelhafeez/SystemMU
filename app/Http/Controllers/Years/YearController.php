@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Years;
 
 use App\Http\Controllers\Controller;
 use App\Models\Year;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreYears;
 
@@ -17,7 +18,8 @@ class YearController extends Controller
     public function index()
     {
         $years = Year::all();
-        return view('years.years',compact('years'));
+        $semesters = Semester::all();
+        return view('years.years',compact('years','semesters'));
     }
 
     /**
@@ -43,6 +45,7 @@ class YearController extends Controller
             $validated = $request->validated();
             $year = Year::create($request->all());
             $year->save();
+            $year->semesters()->attach($request->semester_id);
             toastr()->success('Year has been saved successfully!');
 
                 return redirect()->route('years.index');
@@ -93,6 +96,12 @@ class YearController extends Controller
             $validated = $request->validated();
             $year = Year::findOrFail($request->id);
             $year->update($request->all());
+            if (isset($request->semester_id)){
+                $year->semesters()->sync($request->semester_id);
+            }
+            else{
+                $year->semesters()->sync(array());
+            }
             toastr()->success('Year has been updated successfully!');
 
                 return redirect()->route('years.index');

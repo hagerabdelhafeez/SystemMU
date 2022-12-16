@@ -146,8 +146,6 @@
                                                                     @endforeach
                                                                 </select>
 
-
-
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default"
@@ -208,7 +206,6 @@
                                         </option>
                                     @endforeach
                                 </select>
-
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

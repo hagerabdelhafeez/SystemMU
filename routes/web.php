@@ -32,7 +32,6 @@ Route::resource('departments', 'App\Http\Controllers\Departments\DepartmentContr
 Route::resource('years', 'App\Http\Controllers\Years\YearController');
 Route::resource('semesters', 'App\Http\Controllers\Semesters\SemesterController');
 Route::resource('courses', 'App\Http\Controllers\Courses\CourseController');
-Route::resource('curriculums', 'App\Http\Controllers\Curriculums\CurriculumController');
 Route::resource('sliders', 'App\Http\Controllers\Sliders\SliderController');
 Route::resource('calendars', 'App\Http\Controllers\Calendars\CalendarController');
 Route::resource('news', 'App\Http\Controllers\News\NawController');
