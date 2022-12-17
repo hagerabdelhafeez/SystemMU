@@ -107,19 +107,23 @@
                                  <p>Curriculums</p>
                              </a>
                          </li>
-                         <li class="nav-item">
-                             <a href="" class="nav-link">
-                                 <i class="far fa-circle nav-icon"></i>
-                                 <p>Teachers of Courses</p>
-                             </a>
-                         </li>
+
                      </ul>
                  </li>
                  <li class="nav-item">
-                     <a href="" class="nav-link">
+                     <a href="{{ route('teachers.index') }}" class="nav-link">
                          <i class="nav-icon fas fa-chalkboard-teacher"></i>
                          <p>
                              Teachers
+                         </p>
+                     </a>
+                 </li>
+
+                 <li class="nav-item">
+                     <a href="{{ route('employees.index') }}" class="nav-link">
+                         <i class="nav-icon fas fa-user-edit"></i>
+                         <p>
+                             Scientific Affairs
                          </p>
                      </a>
                  </li>

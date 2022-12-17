@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    News
+    Scientific Affairs
 @stop
 
 @section('css')
@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
 @endsection
 
 @section('title_page1')
-    News
+    Scientific Affairs
 @endsection
 
 @section('title_page2')
-    News
+    Scientific Affairs
 @endsection
 
 @section('content')
@@ -37,20 +38,17 @@
                                     </ul>
                                 </div>
                             @endif
+                            <a class="btn btn-success" href="{{ route('employees.create') }}"> Add Employee</a>
 
-                            <a class="btn btn-success" href="{{ route('news.create') }}"> Add New</a>
-                           
 
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Title</th>
-                                        <th>Photos</th>
-                                        <th>Abstract</th>
-                                        <th>Details</th>
-                                        <th>Created</th>
-                                        <th>Updated</th>
+                                        <th>Employee name</th>
+                                        <th>Mobile number</th>
+                                        <th>Gender</th>
+                                        <th>Address</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -58,22 +56,18 @@
                                     @php
                                         $i = 0;
                                     @endphp
-                                    @foreach ($news as $item)
+                                    @foreach ($employees as $item)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $item->title }}</td>
-                                            <td>
-                                                <img src="{{ URL::asset($item->photos) }}" alt="{{ $item->photos }}"
-                                                    class="img-circle elevation-2" width="50" height="50">
-                                            </td>
-                                            <td>{{ $item->abstract }}</td>
-                                            <td>{{ $item->details }}</td>
-                                            <td>{{ $item->created_at->diffForhumans()}}</td>
-                                            <td>{{ $item->updated_at->diffForhumans() }}</td>
+                                            <td>{{ $item->employee_name }}</td>
+                                            <td>{{ $item->mobile_number }}</td>
+                                            <td>{{ $item->genders->genders_name }}</td>
+                                            <td>{{ $item->Address }}</td>
+
                                             <td>
 
                                                 <a class="btn btn-info btn-sm"
-                                                    href="{{ route('news.edit', $item->id) }}"><i
+                                                    href="{{ route('employees.edit', $item->id) }}"><i
                                                         class="fa fa-edit"></i></a>
 
 
@@ -86,14 +80,14 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content bg-danger">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Delete New</h4>
+                                                                <h4 class="modal-title">Delete Employee</h4>
                                                                 <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('news.destroy', $item->id) }}"
+                                                                <form action="{{ route('employees.destroy', $item->id) }}"
                                                                     method="post">
                                                                     {{ method_field('Delete') }}
                                                                     @csrf
@@ -129,9 +123,9 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+
     </section>
     <!-- /.content -->
-
 @endsection
 
 @section('js')
@@ -163,18 +157,10 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                // "buttons": ["colvis"]
+
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
     </script>
 
-    <!-- bs-custom-file-input -->
-    <script type="text/javascript"
-        src="{{ URL::asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-    <!-- Page specific script -->
-    <script>
-        $(function() {
-            bsCustomFileInput.init();
-        });
-    </script>
+
 @endsection

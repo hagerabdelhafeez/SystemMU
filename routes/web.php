@@ -35,5 +35,7 @@ Route::resource('courses', 'App\Http\Controllers\Courses\CourseController');
 Route::resource('sliders', 'App\Http\Controllers\Sliders\SliderController');
 Route::resource('calendars', 'App\Http\Controllers\Calendars\CalendarController');
 Route::resource('news', 'App\Http\Controllers\News\NawController');
+Route::resource('teachers', 'App\Http\Controllers\Teachers\TeacherController');
+Route::resource('employees', 'App\Http\Controllers\Employees\EmployeeController');
 
 });

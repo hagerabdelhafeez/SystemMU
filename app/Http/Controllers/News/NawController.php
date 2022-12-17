@@ -99,9 +99,9 @@ class NawController extends Controller
     {
         try{
 
-                $naw = Naw::findOrFail($request->id);
                 $validated = $request->validated();
-
+                $naw = Naw::findOrFail($request->id);
+                
                 $image_path = $request->photos;
                 $newImage = time().$image_path->getClientOriginalName();
                 $image_path->move('uploads/images',$newImage);
