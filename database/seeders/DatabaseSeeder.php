@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ClassTableSeeder::class,
             GenderTableSeeder::class,
+            ReligonTableSeeder::class,
+            NationalityTableSeeder::class,
+            BloodTableSeeder::class,
 
         ]);
     }

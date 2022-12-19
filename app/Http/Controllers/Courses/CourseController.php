@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Courses;
 
 use App\Models\Course;
 use App\Http\Controllers\Controller;
-use App\Models\College;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCourses;
 
@@ -18,8 +17,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        $colleges = College::all();
-        return view('courses.courses', compact('courses', 'colleges'));
+        return view('courses.courses', compact('courses'));
     }
 
     /**

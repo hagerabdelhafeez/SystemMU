@@ -16,5 +16,20 @@ class Department extends Model
         return $this->belongsTo('App\Models\College', 'colleges_id');
     }
 
+    public function classes()
+    {
+        return $this->belongsToMany('App\Models\Clas', 'department_clas','department_id','clas_id');
+    }
+
+    public function teachers()
+    {
+        return $this->hasMany('App\Models\Teacher', 'departments_id');
+    }
+
+    public function students()
+    {
+        return $this->hasMany('App\Models\Student', 'departments_id');
+    }
+
 
 }

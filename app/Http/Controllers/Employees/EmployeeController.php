@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Employees;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Gender;
+use App\Models\Nationality;
+use App\Models\Blood;
+use App\Models\Religon;
 use App\Http\Requests\StoreEmployees;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -30,7 +33,10 @@ class EmployeeController extends Controller
     public function create()
     {
         $genders = Gender::all();
-        return view('employees.create',compact('genders'));
+        $religons = Religon::all();
+        $bloods = Blood::all();
+        $nationalities = Nationality::all();
+        return view('employees.create',compact('genders','religons','bloods','nationalities'));
     }
 
     /**
@@ -51,6 +57,10 @@ class EmployeeController extends Controller
             $employee->Address = $request->Address;
             $employee->email = $request->email;
             $employee->genders_id = $request->genders_id;
+            $employee->nationalities_id = $request->nationalities_id;
+            $employee->blood_id = $request->blood_id;
+            $employee->religons_id = $request->religons_id;
+            $employee->date_birth = $request->date_birth;
             $employee->password = Hash::make($request->password);
 
             $employee->save();
@@ -75,7 +85,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return view('employees.show',compact('employee'));
     }
 
     /**
@@ -88,7 +98,10 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         $genders = Gender::all();
-        return view('employees.edit',compact('employee','genders'));
+        $religons = Religon::all();
+        $bloods = Blood::all();
+        $nationalities = Nationality::all();
+        return view('employees.edit',compact('employee','genders','religons','bloods','nationalities'));
     }
 
     /**
@@ -110,6 +123,10 @@ class EmployeeController extends Controller
             $employee->Address = $request->Address;
             $employee->email = $request->email;
             $employee->genders_id = $request->genders_id;
+            $employee->nationalities_id = $request->nationalities_id;
+            $employee->blood_id = $request->blood_id;
+            $employee->religons_id = $request->religons_id;
+            $employee->date_birth = $request->date_birth;
             $employee->password = Hash::make($request->password);
 
             $employee->save();

@@ -34,14 +34,14 @@
                                 </div>
                             @endif
 
-                            <form action="{{ route('teachers.update', $teacher->id) }}" method="POST">
+                            <form action="{{ route('teachers.update', $teacher->id) }}" method="POST" autocomplete="off">
                                 {{ method_field('patch') }}
                                 @csrf
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-4">
                                             <label> Teacher name:</label>
-                                            <input type="hidden" value="{{$teacher->id}}" name="id">
+                                            <input type="hidden" value="{{ $teacher->id }}" name="id">
                                             <input name="teacher_name" value="{{ $teacher->teacher_name }}" type="text"
                                                 class="form-control" required>
                                         </div>
@@ -51,7 +51,7 @@
                                                 class="form-control" required>
                                         </div>
                                         <div class="col-4">
-                                            <label>Gender name:</label>
+                                            <label>Gender:</label>
                                             <select class="form-control" name="genders_id">
                                                 <option value="{{ $teacher->genders_id }}">
                                                     {{ $teacher->genders->genders_name }}</option>
@@ -83,6 +83,84 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label>Birth Date:</label>
+                                                <div class="input-group date" id="reservationdate"
+                                                    data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input"
+                                                        data-target="#reservationdate" name="date_birth"
+                                                        value="{{ $teacher->date_birth }}" required />
+                                                    <div class="input-group-append" data-target="#reservationdate"
+                                                        data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Blood Type:</label>
+                                                <select class="form-control" name="blood_id">
+                                                    <option value="{{ $teacher->blood_id }}">
+                                                        {{ $teacher->blood->blood_name }}</option>
+                                                    @foreach ($bloods as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->blood_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label>Religon :</label>
+                                                <select class="form-control" name="religons_id">
+                                                    <option value="{{ $teacher->religons_id }}">
+                                                        {{ $teacher->religons->religons_name }}</option>
+                                                    @foreach ($religons as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->religons_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label>Nationality:</label>
+                                                <select class="form-control" name="nationalities_id">
+                                                    <option value="{{ $teacher->nationalities_id }}">
+                                                        {{ $teacher->nationalities->nationalities_name }}</option>
+                                                    @foreach ($nationalities as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->nationalities_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label>Departments:</label>
+                                                <select class="form-control" name="departments_id">
+                                                    <option value="{{ $teacher->departments_id }}">
+                                                        {{ $teacher->departments->department_name }}</option>
+                                                    @foreach ($departments as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->department_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Degree:</label>
+                                                <input name="degree" value="{{ $teacher->degree }}" type="text"
+                                                    class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                 </div>
                                 <div class="form-group">
@@ -107,5 +185,20 @@
 @endsection
 
 @section('js')
+    <script>
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: ' YYYY-MM-DD'
+        });
+
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('YYYY-MM-DD', {
+            'placeholder': 'YYYY-MM-DD'
+        })
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('YYYY-MM-DD', {
+            'placeholder': 'YYYY-MM-DD'
+        })
+    </script>
 
 @endsection

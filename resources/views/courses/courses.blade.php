@@ -41,7 +41,7 @@
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
                                 Add Course
                             </button>
-                            <br><br>
+                            
 
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -50,7 +50,6 @@
                                         <th>Course name</th>
                                         <th>Course code</th>
                                         <th>Course credit hours</th>
-                                        <th>College name</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -64,7 +63,6 @@
                                             <td>{{ $item->course_name }}</td>
                                             <td>{{ $item->course_code }}</td>
                                             <td>{{ $item->courses_credit_hours }}</td>
-                                            <td>{{ $item->colleges->college_name }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                     data-target="#edit{{ $item->id }}" title="Edit"><i
@@ -151,28 +149,12 @@
                                                                             value="{{ $item->courses_credit_hours }}"required>
                                                                     </div>
                                                                 </div>
-                                                                <label>College name
-                                                                    :</label>
-                                                                <select class="form-control" name="colleges_id">
-                                                                    <option value="{{ $item->colleges->id }}">
-                                                                        {{ $item->colleges->college_name }}
-                                                                    </option>
-                                                                    @foreach ($colleges as $item)
-                                                                        <option value="{{ $item->id }}">
-                                                                            {{ $item->college_name }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-
-
-
                                                             </div>
 
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default"
                                                                     data-dismiss="modal">Close</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Edit</button>
+                                                                <button type="submit" class="btn btn-primary">Edit</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -224,16 +206,6 @@
                                         <input name="courses_credit_hours" type="text" class="form-control" required>
                                     </div>
                                 </div>
-                                <label>College name:</label>
-                                <select class="form-control" name="colleges_id">
-                                    <option selected>Choose...</option>
-                                    @foreach ($colleges as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->college_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -280,7 +252,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["colvis"]
+
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
     </script>

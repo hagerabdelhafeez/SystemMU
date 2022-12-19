@@ -104,7 +104,14 @@
                          <li class="nav-item">
                              <a href="" class="nav-link">
                                  <i class="far fa-circle nav-icon"></i>
-                                 <p>Curriculums</p>
+                                 <p>Curricula</p>
+                             </a>
+                         </li>
+
+                         <li class="nav-item">
+                             <a href="" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Common Courses</p>
                              </a>
                          </li>
 
@@ -136,7 +143,7 @@
                      </a>
                  </li>
                  <li class="nav-item">
-                     <a href="" class="nav-link">
+                     <a href="{{ route('students.index') }}" class="nav-link">
                          <i class="nav-icon fas fa-user-graduate"></i>
                          <p>
                              Students

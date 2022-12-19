@@ -15,4 +15,9 @@ class College extends Model
     {
         return $this->hasMany('App\Models\Department', 'colleges_id');
     }
+
+    public function students()
+    {
+        return $this->hasMany('App\Models\Student', 'colleges_id');
+    }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Add Employee
+    Add Student
 @stop
 
 @section('css')
@@ -9,11 +9,11 @@
 @endsection
 
 @section('title_page1')
-    Add Employee
+    Add Student
 @endsection
 
 @section('title_page2')
-    Add Employee
+    Add Student
 @endsection
 
 @section('content')
@@ -34,13 +34,13 @@
                                 </div>
                             @endif
 
-                            <form action="{{ route('employees.store') }}" method="POST" autocomplete="off">
+                            <form action="{{ route('students.store') }}" method="POST" autocomplete="off">
                                 @csrf
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-4">
-                                            <label> Employee name:</label>
-                                            <input name="employee_name" type="text" class="form-control" required>
+                                            <label> Student name:</label>
+                                            <input name="student_name" type="text" class="form-control" required>
                                         </div>
                                         <div class="col-4">
                                             <label> Mobile number:</label>
@@ -71,6 +71,15 @@
                                             <input name="password" type="password" class="form-control" required>
                                         </div>
                                         <div class="col-4">
+                                            <label>Student ID:</label>
+                                            <input name="student_no" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-4">
                                             <label>Birth Date:</label>
                                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                                 <input type="text" class="form-control datetimepicker-input"
@@ -81,13 +90,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-
                                         <div class="col-4">
                                             <label>Blood Type:</label>
                                             <select class="form-control" name="blood_id">
@@ -111,6 +113,11 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
                                         <div class="col-4">
                                             <label>Nationality:</label>
                                             <select class="form-control" name="nationalities_id">
@@ -122,8 +129,63 @@
                                                 @endforeach
                                             </select>
                                         </div>
+
+                                        <div class="col-4">
+                                            <label for="colleges_id">Colleges:</label>
+                                            <select class="form-control" name="colleges_id">
+                                                <option selected >Choose...</option>
+                                                @foreach ($colleges as $item)
+                                                    <option value="{{ $item->id }}">
+                                                        {{ $item->college_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-4">
+                                            <label>Departments:</label>
+                                            <select class="form-control" name="departments_id">
+                                                <option selected>Choose...</option>
+                                                @foreach ($departments as $item)
+                                                    <option value="{{ $item->id }}">
+                                                        {{ $item->department_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>Classes:</label>
+                                            <select class="form-control" name="class_id">
+                                                <option selected>Choose...</option>
+                                                @foreach ($classes as $item)
+                                                    <option value="{{ $item->id }}">
+                                                        {{ $item->class_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col">
+                                            <label>Academic Year:</label>
+                                            <select class="form-control" name="years_id">
+                                                <option selected>Choose...</option>
+                                                @foreach ($years as $item)
+                                                    <option value="{{ $item->id }}">
+                                                        {{ $item->year_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="form-group">
                                     <label>Address:</label>
@@ -131,8 +193,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success ">Add Employee</button>
-                                    <a class="btn btn-secondary" href="{{ route('employees.index') }}">Cancel</a>
+                                    <button type="submit" class="btn btn-success ">Add Student</button>
+                                    <a class="btn btn-secondary" href="{{ route('students.index') }}">Cancel</a>
                                 </div>
                             </form>
                         </div>

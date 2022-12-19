@@ -49,6 +49,7 @@
                                         <th>Mobile number</th>
                                         <th>Gender</th>
                                         <th>Address</th>
+                                        <th>Birth Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -63,12 +64,17 @@
                                             <td>{{ $item->mobile_number }}</td>
                                             <td>{{ $item->genders->genders_name }}</td>
                                             <td>{{ $item->Address }}</td>
+                                            <td>{{ $item->date_birth }}</td>
 
                                             <td>
 
                                                 <a class="btn btn-info btn-sm"
                                                     href="{{ route('employees.edit', $item->id) }}"><i
                                                         class="fa fa-edit"></i></a>
+
+                                                <a class="btn btn-warning btn-sm"
+                                                    href="{{ route('employees.show', $item->id) }}"><i
+                                                        class="far fa-eye"></i></a>
 
 
                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"

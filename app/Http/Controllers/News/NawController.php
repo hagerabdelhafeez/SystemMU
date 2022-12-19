@@ -82,10 +82,11 @@ class NawController extends Controller
      * @param  \App\Models\Naw  $naw
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( Naw $naw, $id)
     {
-        $naw = Naw::findOrFail($id);
+        $naw = Naw::findOrFail( $naw);
         return view('news.edit',compact('naw'));
+
     }
 
     /**
@@ -95,20 +96,27 @@ class NawController extends Controller
      * @param  \App\Models\Naw  $naw
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNews $request)
+    public function update(StoreNews $request ,Naw $naw)
     {
         try{
 
                 $validated = $request->validated();
-                $naw = Naw::findOrFail($request->id);
-                
-                $image_path = $request->photos;
-                $newImage = time().$image_path->getClientOriginalName();
-                $image_path->move('uploads/images',$newImage);
-                $naw->photos = 'uploads/images'.$newImage;
-                $naw->save();
+                //$naw = Naw::findOrFail($request->id);
+                $naw -> update($request->all());
 
-                $naw = Naw::update($request->all());
+
+
+                if($request->hasfile('photos') ){
+                    $image_path = $request->photos;
+                    $newImage = time().$image_path->getClientOriginalName();
+                    $image_path->move('uploads/images',$newImage);
+                    $naw->photos = 'uploads/images'.$newImage;
+                    $naw->save();
+                }
+
+
+
+
                 toastr()->success('New has been updated successfully!');
 
                 return redirect()->route('news.index');

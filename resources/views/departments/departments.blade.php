@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
 
 @endsection
 
@@ -49,8 +53,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Department name</th>
                                         <th>College name</th>
+                                        <th>Department name</th>
+                                        <th>Years</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -61,8 +66,17 @@
                                     @foreach ($departments as $item)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $item->department_name }}</td>
                                             <td>{{ $item->colleges->college_name }}</td>
+                                            <td>{{ $item->department_name }}</td>
+                                            <td>
+                                                @foreach ($item->classes as $class)
+                                                    {{ $class['class_name'] }}
+                                                    <br>
+                                                @endforeach
+
+
+                                            </td>
+
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                                     data-target="#edit{{ $item->id }}" title="Edit"><i
@@ -80,7 +94,8 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('departments.destroy', $item->id) }}"
+                                                                <form
+                                                                    action="{{ route('departments.destroy', $item->id) }}"
                                                                     method="post">
                                                                     {{ method_field('Delete') }}
                                                                     @csrf
@@ -146,8 +161,19 @@
                                                                     @endforeach
                                                                 </select>
 
-
-
+                                                                <label>Years:</label>
+                                                                <select class="select2bs4" multiple="multiple"
+                                                                    data-placeholder="Choose..." name="clas_id[]">
+                                                                    @foreach ($item->departments as $sem)
+                                                                        <option selected value="{{ $sem['id'] }}">
+                                                                            {{ $sem['class_name'] }}</option>
+                                                                    @endforeach
+                                                                    @foreach ($classes as $item)
+                                                                        <option value="{{ $item->id }}">
+                                                                            {{ $item->class_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
 
                                                             <div class="modal-footer">
@@ -204,6 +230,18 @@
                                     @endforeach
                                 </select>
 
+                                <label>Years:</label>
+                                <select class="select2bs4" multiple="multiple" data-placeholder="Choose..."
+                                    name="clas_id[]">
+                                    @foreach ($classes as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->class_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+
+
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -259,6 +297,23 @@
                 "responsive": true,
             });
         });
+    </script>
+
+    <!-- Select2 -->
+    <script type="text/javascript" src="{{ URL::asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+
+        })
     </script>
 
 

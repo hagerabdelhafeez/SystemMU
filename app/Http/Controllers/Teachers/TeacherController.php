@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Teachers;
 use App\Http\Controllers\Controller;
 use App\Models\Teacher;
 use App\Models\Gender;
+use App\Models\Nationality;
+use App\Models\Blood;
+use App\Models\Religon;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTeachers;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +34,11 @@ class TeacherController extends Controller
     public function create()
     {
         $genders = Gender::all();
-        return view('teachers.create',compact('genders'));
+        $religons = Religon::all();
+        $bloods = Blood::all();
+        $nationalities = Nationality::all();
+        $departments = Department::all();
+        return view('teachers.create',compact('genders','religons','bloods','nationalities','departments'));
     }
 
     /**
@@ -51,6 +59,12 @@ class TeacherController extends Controller
             $teacher->Address = $request->Address;
             $teacher->email = $request->email;
             $teacher->genders_id = $request->genders_id;
+            $teacher->nationalities_id = $request->nationalities_id;
+            $teacher->blood_id = $request->blood_id;
+            $teacher->religons_id = $request->religons_id;
+            $teacher->date_birth = $request->date_birth;
+            $teacher->degree = $request->degree;
+            $teacher->departments_id = $request->departments_id;
             $teacher->password = Hash::make($request->password);
 
             $teacher->save();
@@ -76,7 +90,7 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        //
+        return view('teachers.show',compact('teacher'));
     }
 
     /**
@@ -89,7 +103,11 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::findOrFail($id);
         $genders = Gender::all();
-        return view('teachers.edit',compact('teacher','genders'));
+        $religons = Religon::all();
+        $bloods = Blood::all();
+        $nationalities = Nationality::all();
+        $departments = Department::all();
+        return view('teachers.edit',compact('teacher','genders','religons','bloods','nationalities','departments'));
     }
 
     /**
@@ -112,6 +130,12 @@ class TeacherController extends Controller
             $teacher->Address = $request->Address;
             $teacher->email = $request->email;
             $teacher->genders_id = $request->genders_id;
+            $teacher->nationalities_id = $request->nationalities_id;
+            $teacher->blood_id = $request->blood_id;
+            $teacher->religons_id = $request->religons_id;
+            $teacher->date_birth = $request->date_birth;
+            $teacher->degree = $request->degree;
+            $teacher->departments_id = $request->departments_id;
             $teacher->password = Hash::make($request->password);
 
             $teacher->save();

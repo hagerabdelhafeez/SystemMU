@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Teachers
+    Students
 @stop
 
 @section('css')
@@ -13,11 +13,11 @@
 @endsection
 
 @section('title_page1')
-    Teachers
+    Students
 @endsection
 
 @section('title_page2')
-    Teachers
+    Students
 @endsection
 
 @section('content')
@@ -38,14 +38,14 @@
                                     </ul>
                                 </div>
                             @endif
-                            <a class="btn btn-success" href="{{ route('teachers.create') }}"> Add Teacher</a>
+                            <a class="btn btn-success" href="{{ route('students.create') }}"> Add Student</a>
 
 
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Teacher name</th>
+                                        <th>Students name</th>
                                         <th>Mobile number</th>
                                         <th>Gender</th>
                                         <th>Address</th>
@@ -57,10 +57,10 @@
                                     @php
                                         $i = 0;
                                     @endphp
-                                    @foreach ($teachers as $item)
+                                    @foreach ($students as $item)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $item->teacher_name }}</td>
+                                            <td>{{ $item->student_name }}</td>
                                             <td>{{ $item->mobile_number }}</td>
                                             <td>{{ $item->genders->genders_name }}</td>
                                             <td>{{ $item->Address }}</td>
@@ -68,11 +68,11 @@
                                             <td>
 
                                                 <a class="btn btn-info btn-sm"
-                                                    href="{{ route('teachers.edit', $item->id) }}"><i
+                                                    href="{{ route('students.edit', $item->id) }}"><i
                                                         class="fa fa-edit"></i></a>
 
                                                 <a class="btn btn-warning btn-sm"
-                                                    href="{{ route('teachers.show', $item->id) }}"><i
+                                                    href="{{ route('students.show', $item->id) }}"><i
                                                         class="far fa-eye"></i></a>
 
 
@@ -85,14 +85,14 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content bg-danger">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Delete Teacher</h4>
+                                                                <h4 class="modal-title">Delete Student</h4>
                                                                 <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('teachers.destroy', $item->id) }}"
+                                                                <form action="{{ route('students.destroy', $item->id) }}"
                                                                     method="post">
                                                                     {{ method_field('Delete') }}
                                                                     @csrf

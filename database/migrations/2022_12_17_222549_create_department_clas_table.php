@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSemesterYearTable extends Migration
+class CreateDepartmentClasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateSemesterYearTable extends Migration
      */
     public function up()
     {
-        Schema::create('semester_year', function (Blueprint $table) {
+        Schema::create('department_clas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('year_id')->unsigned();
-            $table->foreign('year_id')->references('id')->on('years')
+            $table->bigInteger('department_id')->unsigned();
+            $table->foreign('department_id')->references('id')->on('departments')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->bigInteger('semester_id')->unsigned();
-            $table->foreign('semester_id')->references('id')->on('semesters')
+            $table->bigInteger('clas_id')->unsigned();
+            $table->foreign('clas_id')->references('id')->on('clas')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-
 
         });
     }
@@ -35,6 +34,6 @@ class CreateSemesterYearTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('semester_year');
+        Schema::dropIfExists('department_clas');
     }
 }

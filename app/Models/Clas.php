@@ -14,5 +14,19 @@ class Clas extends Model
     public function semesters()
     {
         return $this->hasMany('App\Models\Semester', 'class_id');
+
     }
+
+
+    public function departments()
+    {
+        return $this->belongsToMany('App\Models\Department', 'department_clas','clas_id','department_id');
+    }
+
+    public function students()
+    {
+        return $this->hasMany('App\Models\Student', 'class_id');
+    }
+
+
 }

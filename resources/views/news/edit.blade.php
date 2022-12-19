@@ -38,9 +38,9 @@
                                 {{ method_field('patch') }}
                                 @csrf
                                 <div class="form-group">
-                                    
-                                    <label> Title:</label>
 
+                                    <label> Title:</label>
+                                    {{-- <input type="hidden" value="{{$naw->id}}" name="id"> --}}
                                     <input name="title" value="{{ $naw->title }}" type="text" class="form-control"
                                         placeholder="Enter ... " required>
                                 </div>

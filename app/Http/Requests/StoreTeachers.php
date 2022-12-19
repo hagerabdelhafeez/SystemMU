@@ -29,6 +29,13 @@ class StoreTeachers extends FormRequest
             'mobile_number' => 'required|numeric|min:10',
             'Address' => 'required',
             'password' => 'required|string',
+            'date_birth' => 'required|date',
+            'degree' => 'required',
+            'genders_id' => 'required',
+            'blood_id' => 'required',
+            'religons_id' => 'required',
+            'nationalities_id' => 'required',
+            'departments_id' => 'required',
         ];
     }
 }

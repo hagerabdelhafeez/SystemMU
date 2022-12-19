@@ -16,4 +16,9 @@ class Year extends Model
         return $this->belongsToMany('App\Models\Semester', 'semester_year');
     }
 
+    public function students()
+    {
+        return $this->hasMany('App\Models\Student', 'years_id');
+    }
+
 }

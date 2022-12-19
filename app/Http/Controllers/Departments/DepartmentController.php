@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Departments;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\College;
+use App\Models\Clas;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDepartments;
 
@@ -19,7 +20,8 @@ class DepartmentController extends Controller
     {
         $departments = Department::all();
         $colleges = College::all();
-        return view('departments.departments', compact('departments', 'colleges'));
+        $classes = Clas::all();
+        return view('departments.departments', compact('departments', 'colleges','classes'));
     }
 
     /**
@@ -44,9 +46,9 @@ class DepartmentController extends Controller
     try{
 
         $validated = $request->validated();
-            $departments = Department::create($request->all());
-            $departments->save();
-
+        $departments = Department::create($request->all());
+        $departments->save();
+        $departments->classes()->attach($request->clas_id);
         toastr()->success('Department has been saved successfully!');
 
                 return redirect()->route('departments.index');
@@ -54,9 +56,8 @@ class DepartmentController extends Controller
 
     catch(\Exception $e){
         return redirect()->back()->withErrors(['error'=> $e -> getMessage()]);
-
-
     }
+
     }
 
     /**
@@ -95,6 +96,12 @@ class DepartmentController extends Controller
             $validated = $request->validated();
             $department = Department::findOrFail($request->id);
             $department->update($request->all());
+            if (isset($request->clas_id)){
+                $department->classes()->sync($request->clas_id);
+            }
+            else{
+                $department->classes()->sync(array());
+            }
             toastr()->success('Department has been updated successfully!');
             return redirect()->route('departments.index');
         }
