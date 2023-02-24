@@ -27,7 +27,7 @@ class StoreEmployees extends FormRequest
 
             'employee_name' => 'required|unique:employees,employee_name,'.$this->id,
             'email' => 'required|email|unique:employees,email,'.$this->id,
-            'mobile_number' => 'required|numeric|min:10',
+            'mobile_number' => 'required|min:10|max:10',
             'Address' => 'required',
             'password' => 'required|string',
             'date_birth' => 'required|date',

@@ -9,6 +9,7 @@ use App\Models\Nationality;
 use App\Models\Blood;
 use App\Models\Religon;
 use App\Models\Department;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTeachers;
 use Illuminate\Support\Facades\Hash;
@@ -38,7 +39,8 @@ class TeacherController extends Controller
         $bloods = Blood::all();
         $nationalities = Nationality::all();
         $departments = Department::all();
-        return view('teachers.create',compact('genders','religons','bloods','nationalities','departments'));
+        $courses = Course::all();
+        return view('teachers.create',compact('genders','religons','bloods','nationalities','departments','courses'));
     }
 
     /**
@@ -68,6 +70,7 @@ class TeacherController extends Controller
             $teacher->password = Hash::make($request->password);
 
             $teacher->save();
+            $teacher->courses()->attach($request->course_id);
 
             toastr()->success('Teacher has been saved successfully!');
 
@@ -107,7 +110,8 @@ class TeacherController extends Controller
         $bloods = Blood::all();
         $nationalities = Nationality::all();
         $departments = Department::all();
-        return view('teachers.edit',compact('teacher','genders','religons','bloods','nationalities','departments'));
+        $courses = Course::all();
+        return view('teachers.edit',compact('teacher','genders','religons','bloods','nationalities','departments','courses'));
     }
 
     /**
@@ -139,6 +143,12 @@ class TeacherController extends Controller
             $teacher->password = Hash::make($request->password);
 
             $teacher->save();
+            if (isset($request->course_id)){
+                $teacher->courses()->sync($request->course_id);
+            }
+            else{
+                $teacher->courses()->sync(array());
+            }
 
 
             toastr()->success('Teacher has been updated successfully!');

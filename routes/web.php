@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes(['register' => true]);
+
 Route::group(['middleware'=>['guest']],function(){
     Route::get('/', function()
 {
@@ -38,5 +39,8 @@ Route::resource('news', 'App\Http\Controllers\News\NawController');
 Route::resource('teachers', 'App\Http\Controllers\Teachers\TeacherController');
 Route::resource('employees', 'App\Http\Controllers\Employees\EmployeeController');
 Route::resource('students', 'App\Http\Controllers\Students\StudentController');
+Route::resource('curricula', 'App\Http\Controllers\Curriculum\CurriculumController');
+Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+Route::resource('commons', 'App\Http\Controllers\Common\CommonController');
 
 });

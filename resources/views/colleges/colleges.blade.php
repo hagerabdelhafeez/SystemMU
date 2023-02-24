@@ -40,6 +40,11 @@
                                     </ul>
                                 </div>
                             @endif
+                            @if ($message = Session::get('Warning'))
+                                <div class="alert alert-warning" role="alert">
+                                    {{ $message }}
+                                </div>
+                            @endif
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
                                 Add College
                             </button>
@@ -237,6 +242,8 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
+
+
             });
         });
     </script>

@@ -21,4 +21,10 @@ class Semester extends Model
         return $this->belongsToMany('App\Models\Year', 'semester_year');
     }
 
+
+    public function curricula()
+    {
+        return $this->hasOne('App\Models\Curriculum', 'semesters_id');
+    }
+
 }

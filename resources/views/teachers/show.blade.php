@@ -65,11 +65,24 @@
                                         <th scope="row">Address</th>
                                         <td> {!! $teacher->Address !!}</td>
                                     </tr>
+                                    <tr>
+                                        <th scope="row">Courses</th>
+                                        <td colspan="5">
+                                            @foreach ($teacher->courses as $sem)
+                                                {{ $sem['course_name'] }}</option>
+                                                &nbsp;
+                                                &nbsp;
+                                                &nbsp;
+                                            @endforeach
+                                        </td>
+
+
+                                    </tr>
                                 </tbody>
                             </table>
                             <br><br>
                             <div class="form-group">
-                                <a class="btn btn-info" href="{{ route('students.index') }}">Back</a>
+                                <a class="btn btn-info" href="{{ route('teachers.index') }}">Back</a>
                             </div>
                         </div>
                         <!-- /.card-body -->

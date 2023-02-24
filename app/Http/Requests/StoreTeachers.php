@@ -26,7 +26,7 @@ class StoreTeachers extends FormRequest
         return [
             'teacher_name' => 'required|unique:teachers,teacher_name,'.$this->id,
             'email' => 'required|email|unique:teachers,email,'.$this->id,
-            'mobile_number' => 'required|numeric|min:10',
+            'mobile_number' => 'required|min:10|max:10',
             'Address' => 'required',
             'password' => 'required|string',
             'date_birth' => 'required|date',
@@ -36,6 +36,7 @@ class StoreTeachers extends FormRequest
             'religons_id' => 'required',
             'nationalities_id' => 'required',
             'departments_id' => 'required',
+            'course_id' => 'required',
         ];
     }
 }

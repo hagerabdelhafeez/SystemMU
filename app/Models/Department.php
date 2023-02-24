@@ -31,5 +31,8 @@ class Department extends Model
         return $this->hasMany('App\Models\Student', 'departments_id');
     }
 
+    public function curricula(){
+        return $this->hasMany('App\Models\Curriculum', 'departments_id');
+    }
 
 }

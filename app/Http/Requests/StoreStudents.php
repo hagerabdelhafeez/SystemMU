@@ -26,7 +26,7 @@ class StoreStudents extends FormRequest
         return [
             'student_name' => 'required|unique:students,student_name,'.$this->id,
             'email' => 'required|email|unique:teachers,email,'.$this->id,
-            'mobile_number' => 'required|numeric|min:10',
+            'mobile_number' => 'required|min:10|max:10',
             'Address' => 'required',
             'password' => 'required|string',
             'student_no' => 'required|string',

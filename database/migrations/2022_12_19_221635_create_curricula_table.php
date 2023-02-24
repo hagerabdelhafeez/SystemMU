@@ -23,6 +23,7 @@ class CreateCurriculaTable extends Migration
             $table->foreign('semesters_id')->references('id')->on('semesters')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+            // $table->foreignId('semesters_id')->references('id')->on('semesters')->onDelete('cascade');
             $table->bigInteger('years_id')->unsigned();
             $table->foreign('years_id')->references('id')->on('years')
             ->onDelete('cascade')
@@ -31,6 +32,7 @@ class CreateCurriculaTable extends Migration
             $table->foreign('courses_id')->references('id')->on('courses')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->unique(['departments_id','semesters_id','years_id','courses_id']);
             $table->timestamps();
         });
     }

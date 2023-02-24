@@ -127,8 +127,7 @@ class CollegeController extends Controller
 
         else{
 
-            toastr()->warning('It is not possible to delete the college because there are departments attached to it','Warning');
-            return redirect()->route('colleges.index');
+           return redirect()->route('colleges.index')->with('Warning','It is not possible to delete the college because there are departments attached to it');
 
         }
     }

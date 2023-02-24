@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Teachers
+    Common Courses
 @stop
 
 @section('css')
@@ -10,14 +10,18 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
 @endsection
 
 @section('title_page1')
-    Teachers
+    Common Courses
 @endsection
 
 @section('title_page2')
-    Teachers
+    Common Courses
 @endsection
 
 @section('content')
@@ -38,18 +42,17 @@
                                     </ul>
                                 </div>
                             @endif
-                            <a class="btn btn-success" href="{{ route('teachers.create') }}"> Add Teacher</a>
 
+                            <a class="btn btn-success" href="{{ route('commons.create') }}"> Add Common Courses</a>
 
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Teacher name</th>
-                                        <th>Mobile number</th>
-                                        <th>Degree</th>
-                                        <th>Address</th>
-                                        <th>Courses</th>
+                                        <th>Department name</th>
+                                        <th>Semester</th>
+                                        <th>Academic Years</th>
+                                        <th>Course</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -57,28 +60,24 @@
                                     @php
                                         $i = 0;
                                     @endphp
-                                    @foreach ($teachers as $item)
+                                    @foreach ($commons as $item)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $item->teacher_name }}</td>
-                                            <td>{{ $item->mobile_number }}</td>
-                                            <td>{{ $item->degree }}</td>
-                                            <td>{{ $item->Address }}</td>
+                                            <td>{{ $item->departments->department_name }}</td>
+                                            <td>{{ $item->semesters->semester_name }}</td>
+                                            <td>{{ $item->years->year_name }}</td>
                                             <td>
-                                                @foreach ($item->courses as $sem)
-                                                    {{ $sem['course_name'] }}
+                                                @foreach ($item->courses as $class)
+                                                    {{ $class['course_name'] }}
                                                     <br>
                                                 @endforeach
                                             </td>
+
                                             <td>
 
                                                 <a class="btn btn-info btn-sm"
-                                                    href="{{ route('teachers.edit', $item->id) }}"><i
+                                                    href="{{ route('commons.edit', $item->id) }}"><i
                                                         class="fa fa-edit"></i></a>
-
-                                                <a class="btn btn-warning btn-sm"
-                                                    href="{{ route('teachers.show', $item->id) }}"><i
-                                                        class="far fa-eye"></i></a>
 
 
                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
@@ -90,14 +89,14 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content bg-danger">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Delete Teacher</h4>
+                                                                <h4 class="modal-title">Delete </h4>
                                                                 <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('teachers.destroy', $item->id) }}"
+                                                                <form action="{{ route('commons.destroy', $item->id) }}"
                                                                     method="post">
                                                                     {{ method_field('Delete') }}
                                                                     @csrf
@@ -133,9 +132,9 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-
     </section>
     <!-- /.content -->
+
 @endsection
 
 @section('js')
@@ -172,5 +171,21 @@
         });
     </script>
 
+    <!-- Select2 -->
+    <script type="text/javascript" src="{{ URL::asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+
+        })
+    </script>
 
 @endsection

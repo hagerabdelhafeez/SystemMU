@@ -19,7 +19,7 @@ class CreateTeachersTable extends Migration
             $table->string('degree');
             $table->string('password');
             $table->string('teacher_name')->unique();
-            $table->integer('mobile_number');
+            $table->string('mobile_number');
             $table->date('date_birth');
             $table->text('Address');
             $table->bigInteger('genders_id')->unsigned();

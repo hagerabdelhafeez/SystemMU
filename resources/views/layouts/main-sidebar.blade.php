@@ -102,14 +102,14 @@
                          </li>
 
                          <li class="nav-item">
-                             <a href="" class="nav-link">
+                             <a href="{{ route('curricula.index') }}" class="nav-link">
                                  <i class="far fa-circle nav-icon"></i>
                                  <p>Curricula</p>
                              </a>
                          </li>
 
                          <li class="nav-item">
-                             <a href="" class="nav-link">
+                             <a href="{{ route('commons.index') }}" class="nav-link">
                                  <i class="far fa-circle nav-icon"></i>
                                  <p>Common Courses</p>
                              </a>

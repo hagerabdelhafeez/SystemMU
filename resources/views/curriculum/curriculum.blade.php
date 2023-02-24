@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Teachers
+    Curriculum
 @stop
 
 @section('css')
@@ -10,14 +10,18 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
 @endsection
 
 @section('title_page1')
-    Teachers
+    Curriculum
 @endsection
 
 @section('title_page2')
-    Teachers
+    Curriculum
 @endsection
 
 @section('content')
@@ -38,18 +42,19 @@
                                     </ul>
                                 </div>
                             @endif
-                            <a class="btn btn-success" href="{{ route('teachers.create') }}"> Add Teacher</a>
-
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
+                                Add Courses
+                            </button>
+                            <br><br>
 
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Teacher name</th>
-                                        <th>Mobile number</th>
-                                        <th>Degree</th>
-                                        <th>Address</th>
-                                        <th>Courses</th>
+                                        <th>Department name</th>
+                                        <th>Semester</th>
+                                        <th>Academic Years</th>
+                                        <th>Course</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -57,28 +62,18 @@
                                     @php
                                         $i = 0;
                                     @endphp
-                                    @foreach ($teachers as $item)
+                                    @foreach ($curricula as $item)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $item->teacher_name }}</td>
-                                            <td>{{ $item->mobile_number }}</td>
-                                            <td>{{ $item->degree }}</td>
-                                            <td>{{ $item->Address }}</td>
-                                            <td>
-                                                @foreach ($item->courses as $sem)
-                                                    {{ $sem['course_name'] }}
-                                                    <br>
-                                                @endforeach
-                                            </td>
+                                            <td>{{ $item->departments->department_name }}</td>
+                                            <td>{{ $item->semesters->semester_name }}</td>
+                                            <td>{{ $item->years->year_name }}</td>
+                                            <td>{{ $item->courses->course_name }}</td>
                                             <td>
 
                                                 <a class="btn btn-info btn-sm"
-                                                    href="{{ route('teachers.edit', $item->id) }}"><i
+                                                    href="{{ route('curricula.edit', $item->id) }}"><i
                                                         class="fa fa-edit"></i></a>
-
-                                                <a class="btn btn-warning btn-sm"
-                                                    href="{{ route('teachers.show', $item->id) }}"><i
-                                                        class="far fa-eye"></i></a>
 
 
                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
@@ -90,14 +85,14 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content bg-danger">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Delete Teacher</h4>
+                                                                <h4 class="modal-title">Delete Curriculum</h4>
                                                                 <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('teachers.destroy', $item->id) }}"
+                                                                <form action="{{ route('curricula.destroy', $item->id) }}"
                                                                     method="post">
                                                                     {{ method_field('Delete') }}
                                                                     @csrf
@@ -133,7 +128,99 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 
+
+
+    {{-- Add_modal --}}
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Curriculum</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- add_form -->
+                    <form action="{{ route('curricula.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label>Department name</label>
+                                        <select class="form-control" name="departments_id">
+                                            <option selected>Choose...</option>
+                                            @foreach ($departments as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->department_name }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label>Academic Years</label>
+                                        <select class="form-control" name="years_id">
+                                            <option selected>Choose...</option>
+                                            @foreach ($years as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->year_name }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label>Semester name</label>
+                                        <select class="form-control" name="semesters_id">
+                                            <option selected>Choose...</option>
+                                            @foreach ($semesters as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->semester_name }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Course name</label>
+                                    <select class="select2bs4" multiple="multiple" data-placeholder="Choose..."
+                                        style="width: 100%;" name="courses_id[]">
+                                        @foreach ($courses as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->course_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div> <!-- /.modal -->
     </section>
     <!-- /.content -->
 @endsection
@@ -172,5 +259,21 @@
         });
     </script>
 
+    <!-- Select2 -->
+    <script type="text/javascript" src="{{ URL::asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+
+        })
+    </script>
 
 @endsection

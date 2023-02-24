@@ -12,6 +12,7 @@ class Teacher extends Model
     protected $guarded=[];
     //protected $fillable=['email','password','teacher_name','mobile_number','Address','genders_id'];
 
+
     public function genders()
     {
         return $this->belongsTo('App\Models\Gender', 'genders_id');
@@ -37,5 +38,10 @@ class Teacher extends Model
     public function departments()
     {
         return $this->belongsTo('App\Models\Department', 'departments_id');
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany('App\Models\Course', 'course_teacher');
     }
 }

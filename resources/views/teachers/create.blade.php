@@ -5,6 +5,9 @@
 @stop
 
 @section('css')
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
 @endsection
 
@@ -72,7 +75,14 @@
                                         </div>
                                         <div class="col-4">
                                             <label>Courses:</label>
-                                            <input name="" type="text" class="form-control">
+                                            <select class="select2bs4" multiple="multiple" data-placeholder="Choose..."
+                                            name="course_id[]"  style="width: 100%;">
+                                            @foreach ($courses as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->course_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                         </div>
                                     </div>
                                 </div>
@@ -181,6 +191,23 @@
         //Datemask2 mm/dd/yyyy
         $('#datemask2').inputmask('YYYY-MM-DD', {
             'placeholder': 'YYYY-MM-DD'
+        })
+    </script>
+
+    <!-- Select2 -->
+    <script type="text/javascript" src="{{ URL::asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+
         })
     </script>
 @endsection

@@ -135,7 +135,7 @@
                                                                     class="form-control" value="{{ $item->id }}">
                                                                 <label>Class name
                                                                     :</label>
-                                                                <select class="form-control" name="colleges_id">
+                                                                <select class="form-control" name="class_id">
                                                                     <option value="{{ $item->classes->id }}">
                                                                         {{ $item->classes->class_name }}
                                                                     </option>

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\College;
 use App\Models\Clas;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDepartments;
 
@@ -79,7 +81,10 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+
+        $colleges = College::all();
+        $classes = Clas::all();
+        return view('departments.edit', compact('department', 'colleges','classes'));
     }
 
     /**
@@ -110,6 +115,7 @@ class DepartmentController extends Controller
         (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
+
     }
 
     /**
@@ -120,9 +126,20 @@ class DepartmentController extends Controller
      */
     public function destroy(Request $request)
     {
-        $department = Department::findOrFail($request->id);
-        $department->delete();
-        toastr()->error('Department has been deleted successfully!','Delete');
-        return redirect()->route('departments.index');
+
+        $student_id = Student::where('departments_id',$request->id)->pluck('departments_id');
+        //$teacher_id = Teacher::where('departments_id',$request->id)->pluck('departments_id');
+        if($student_id->count() == 0){
+            $department = Department::findOrFail($request->id)->delete();
+            toastr()->error('Department has been deleted successfully!','Delete');
+            return redirect()->route('departments.index');
+        }
+
+        else{
+
+            return redirect()->route('departments.index')->with('Warning','It is not possible to delete the Department because there are Students and Teachers attached to it');
+
+        }
+
     }
 }

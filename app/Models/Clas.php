@@ -21,6 +21,7 @@ class Clas extends Model
     public function departments()
     {
         return $this->belongsToMany('App\Models\Department', 'department_clas','clas_id','department_id');
+
     }
 
     public function students()

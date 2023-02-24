@@ -21,4 +21,9 @@ class Year extends Model
         return $this->hasMany('App\Models\Student', 'years_id');
     }
 
+    public function curricula()
+    {
+        return $this->hasMany('App\Models\Curriculum', 'years_id');
+    }
+
 }

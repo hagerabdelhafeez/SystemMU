@@ -44,6 +44,12 @@
                                     </ul>
                                 </div>
                             @endif
+
+                            @if ($message = Session::get('Warning'))
+                                <div class="alert alert-warning" role="alert">
+                                    {{ $message }}
+                                </div>
+                            @endif
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">
                                 Add Department
                             </button>
@@ -78,9 +84,9 @@
                                             </td>
 
                                             <td>
-                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                                    data-target="#edit{{ $item->id }}" title="Edit"><i
-                                                        class="fa fa-edit"></i></button>
+                                                <a class="btn btn-info btn-sm"
+                                                    href="{{ route('departments.edit', $item->id) }}"><i
+                                                        class="fa fa-edit"></i></a>
 
                                                 {{-- Delete_modal --}}
                                                 <div class="modal fade" id="delete{{ $item->id }}">
@@ -122,72 +128,6 @@
                                                         class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
-
-
-                                        {{-- Edit_modal --}}
-                                        <div class="modal fade" id="edit{{ $item->id }}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Edit Department</h4>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- edit_form -->
-                                                        <form action="{{ route('departments.update', $item->id) }}"
-                                                            method="POST">
-                                                            {{ method_field('patch') }}
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <label>Department Name:</label>
-                                                                <input type="text"
-                                                                    class="form-control"name="department_name"
-                                                                    value="{{ $item->department_name }}" required>
-                                                                <input id="id" type="hidden" name="id"
-                                                                    class="form-control" value="{{ $item->id }}">
-                                                                <label>College name
-                                                                    :</label>
-                                                                <select class="form-control" name="colleges_id">
-                                                                    <option value="{{ $item->colleges->id }}">
-                                                                        {{ $item->colleges->college_name }}
-                                                                    </option>
-                                                                    @foreach ($colleges as $item)
-                                                                        <option value="{{ $item->id }}">
-                                                                            {{ $item->college_name }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                                <label>Years:</label>
-                                                                <select class="select2bs4" multiple="multiple"
-                                                                    data-placeholder="Choose..." name="clas_id[]">
-                                                                    @foreach ($item->departments as $sem)
-                                                                        <option selected value="{{ $sem['id'] }}">
-                                                                            {{ $sem['class_name'] }}</option>
-                                                                    @endforeach
-                                                                    @foreach ($classes as $item)
-                                                                        <option value="{{ $item->id }}">
-                                                                            {{ $item->class_name }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Edit</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <!-- /.modal-content -->
-                                                </div>
-                                                <!-- /.modal-dialog -->
-                                            </div>
-                                        </div> <!-- /.modal -->
                                     @endforeach
                                 </tbody>
                             </table>
@@ -218,8 +158,8 @@
                             @csrf
                             <div class="form-group">
                                 <label> Department Name:</label>
-                                <input name="department_name" type="text" class="form-control"
-                                    placeholder="Enter ..." required>
+                                <input name="department_name" type="text" class="form-control" placeholder="Enter ..."
+                                    required>
                                 <label>College name:</label>
                                 <select class="form-control" name="colleges_id">
                                     <option selected>Choose...</option>
@@ -239,9 +179,6 @@
                                         </option>
                                     @endforeach
                                 </select>
-
-
-
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
